@@ -20,6 +20,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<distFinalName>beanstalk-default-service-0.0.1</distFinalName>
 	</properties>
 
 	<dependencies>
@@ -44,6 +45,40 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+      <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.2.1</version>
+          <configuration>
+              <descriptors>
+                  <descriptor>assembly.xml</descriptor>
+              </descriptors>
+              <finalName>${project.finalName}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+              <workDirectory>${outputDirectory}/assembly/work</workDirectory>
+          </configuration>
+      </plugin>
+			<plugin>
+				  <groupId>org.codehaus.mojo</groupId>
+				  <artifactId>build-helper-maven-plugin</artifactId>
+				  <executions>
+				    <execution>
+				      <id>attach-artifacts</id>
+				      <phase>package</phase>
+				      <goals>
+				        <goal>attach-artifact</goal>
+				      </goals>
+				      <configuration>
+				        <artifacts>
+				          <artifact>
+				            <file>target/beanstalk-default-service-0.0.1.zip</file>
+				            <type>zip</type>
+				            <classifier>distribution</classifier>
+				          </artifact>
+				        </artifacts>
+				      </configuration>
+				    </execution>
+				  </executions>
+				</plugin>
 		</plugins>
 	</build>
 
