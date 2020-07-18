@@ -1,7 +1,7 @@
 # README #
 
 This is a default beanstalk app that is an empty springboot microservice app
-which creates a single health check endpoint at /actuator/health
+which creates a single health check endpoint at http://localhost:8080/actuator/health
 
 ### What is this repository for? ###
 
