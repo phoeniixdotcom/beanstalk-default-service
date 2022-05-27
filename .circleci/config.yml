@@ -9,14 +9,25 @@ jobs:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: cimg/base:stable
+      - image: amazoncorretto:8
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+
+    parameters:
+      intro_msg:
+        type: string
+        default: "Hello World"
+
+    environment:
+      IMAGETAG: << parameters.intro_msg >>
+
     steps:
+      - run: echo << parameters.intro_msg >>
+      - run: echo ${IMAGETAG}
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "Install packages"
+          command: "yum -y install maven"
       - run:
           name: "Build package"
           command: "mvn package"
