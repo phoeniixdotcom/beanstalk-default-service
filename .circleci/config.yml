@@ -25,6 +25,8 @@ jobs:
       - run: echo << parameters.intro_msg >>
       - run: echo ${IMAGETAG}
       - checkout
+#      - setup_remote_docker:
+#          docker_layer_caching: true
       - run:
           name: "Install packages"
           command: "yum -y install maven"
